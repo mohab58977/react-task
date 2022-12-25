@@ -182,7 +182,7 @@ pipeline {
 
                     sh """
                             gcloud auth activate-service-account serviceaccount@mohab-372519.iam.gserviceaccount.com --key-file="$my" --project=mohab-372519
-                            gcloud container clusters get-credentials app-cluster --region europe-west3 --project mohab-372519
+                            gcloud container clusters get-credentials app-cluster --region europe-west3-b --project mohab-372519
                             export BUILD_NUMBER=\$(cat Deployment/build-green)
                             mv Deployment/green.yaml Deployment/green
                         cat Deployment/green | envsubst > Deployment/green.yaml
