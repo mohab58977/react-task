@@ -49,7 +49,7 @@ pipeline {
 //                 sh 'npm install'
                 // sh 'npm audit fix --audit-level=critical --force'
                 // sh 'npm audit --audit-level=critical'
-            }
+//            }
 //             post {
 //                 success {
 //                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
