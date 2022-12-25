@@ -48,7 +48,7 @@ pipeline {
            
             
             steps {
-                // sh 'npm install'
+                sh 'npm install'
                 // sh 'npm audit fix --audit-level=critical --force'
                 // sh 'npm audit --audit-level=critical'
             }
@@ -66,9 +66,9 @@ pipeline {
 //         stage('Build Image') {
 //             steps {
 //                 script {
-//                     if (env.BRANCH_NAME == 'main') {
-//                         sh 'docker build -t prod:1.0 .'
-//                 } else if (env.BRANCH_NAME == 'stage') {
+//                     if (env.BRANCH_NAME == 'blue') {
+//                         sh 'docker build -t blue:1.0 .'
+//                 } else if (env.BRANCH_NAME == 'green') {
 //                         sh 'docker build -t stage:1.0 .'
 //                 } else {
 //                         sh 'docker build -t test:1.0 .'
@@ -123,35 +123,84 @@ pipeline {
 //                 }
 //             }
 //         }
-        stage('build image and deploy') {
+        stage('build image') {
             steps {
-                steps {
                 script {
-                    // if (env.BRANCH_NAME == 'main') {
+                     if (env.BRANCH_NAME == 'blue') {
                         sh """
                         docker login -u $dockerhub_USR -p $dockerhub_PSW
-                        docker build -t mohab5897/app:$BUILD_NUMBER .
-                        docker push mohab5897/app:$BUILD_NUMBER
-                        docker rmi mohab5897/app:$BUILD_NUMBER
+                        docker build -t mohab5897/reactapp-blue:$BUILD_NUMBER .
+                        docker push mohab5897/reactapp-blue:$BUILD_NUMBER
+                        docker rmi mohab5897/reactapp-blue:$BUILD_NUMBER
                         docker image prune -f
-                        echo ${BUILD_NUMBER} > ../build
+                        echo ${BUILD_NUMBER} > ../build-blue
+                        cat ../build-blue
+                        echo ${BRANCH_NAME} > ../build-branch
+                        cat ../build-branch
                         """
-                    // } else if ( env.BRANCH_NAME == 'dev') {
+                    } else if ( env.BRANCH_NAME == 'green') {
+                    sh """
+                        docker login -u $dockerhub_USR -p $dockerhub_PSW
+                        docker build -t mohab5897/reactapp-green:$BUILD_NUMBER .
+                        docker push mohab5897/reactapp-green:$BUILD_NUMBER
+                        docker rmi mohab5897/reactapp-green:$BUILD_NUMBER
+                        docker image prune -f
+                        echo ${BUILD_NUMBER} > ../build-green
+                        ../build-green
+                        echo ${BRANCH_NAME} > ../build-branch
+                        ../build-branch
+                        """
                        
-                withCredentials([file(credentialsId: 'my', variable: 'my')]){
+              
+                      }
+                } 
+
+            }
+        }
+                stage('deploy') {
+            steps {
+                script {
+                     if (env.BRANCH_NAME == 'blue') {
+                          withCredentials([file(credentialsId: 'my', variable: 'my')]){
 
                     sh """
                             gcloud auth activate-service-account  my-service-account@project-for-mohab.iam.gserviceaccount.com --key-file="$my" --project=project-for-mohab
                             gcloud container clusters get-credentials app-cluster --region europe-west3 --project project-for-mohab
-                            export BUILD_NUMBER=\$(cat ../build)
-                            mv Deployment/deploy.yaml Deployment/deploy
-                        cat Deployment/deploy | envsubst > Deployment/deploy.yaml
-                        rm -f Deployment/deploy
-                        cat Deployment/deploy.yaml 
+                            export BUILD_NUMBER=\$(cat ../build-blue)
+                            mv Deployment/blue.yaml Deployment/blue
+                        cat Deployment/blue | envsubst > Deployment/blue.yaml
+                        rm -f Deployment/blue
+                        cat Deployment/blue.yaml 
+                            export BRANCH_NAME=\$(cat ../build-branch)
+                            mv Deployment/service.yaml Deployment/service
+                        cat Deployment/service | envsubst > Deployment/service.yaml
+                        rm -f Deployment/service
+                        cat Deployment/service.yaml 
                         kubectl apply -f Deployment/
                         """
                          } 
-                    //   }
+                    } else if ( env.BRANCH_NAME == 'green') {
+                     withCredentials([file(credentialsId: 'my', variable: 'my')]){
+
+                    sh """
+                            gcloud auth activate-service-account  my-service-account@project-for-mohab.iam.gserviceaccount.com --key-file="$my" --project=project-for-mohab
+                            gcloud container clusters get-credentials app-cluster --region europe-west3 --project project-for-mohab
+                            export BUILD_NUMBER=\$(cat ../build-green)
+                            mv Deployment/green.yaml Deployment/green
+                        cat Deployment/green | envsubst > Deployment/green.yaml
+                        rm -f Deployment/green
+                        cat Deployment/green.yaml 
+                            export BRANCH_NAME=\$(cat ../build-branch)
+                            mv Deployment/service.yaml Deployment/service
+                        cat Deployment/service | envsubst > Deployment/service.yaml
+                        rm -f Deployment/service
+                        cat Deployment/service.yaml 
+                        kubectl apply -f Deployment/
+                        """
+                         } 
+                       
+              
+                   }
                 } 
 
             }
