@@ -213,17 +213,17 @@ slackSend (channel: 'general', color: '#FF0000', message: "DEPLOYMENT STAGE FAIL
                     }
             }
         }
-        stage('Done') {
-            steps {
-                echo 'DONEDeployment.'
-            }
-            post {
-                success {
-                    slackSend (channel: 'general', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-                }
-                failure {
- slackSend (channel: 'general', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-                }
-            }
-        }
+//         stage('Done') {
+//             steps {
+//                 echo 'DONEDeployment.'
+//             }
+//             post {
+//                 success {
+//                     slackSend (channel: 'general', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                 }
+//                 failure {
+//  slackSend (channel: 'general', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                 }
+//             }
+//         }
 }
