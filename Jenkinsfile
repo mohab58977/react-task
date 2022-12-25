@@ -21,24 +21,24 @@ pipeline {
             }
             post {
                 success {
-                    slackSend (channel: 'general', color: '#00FF00', message: "BUILD STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                    slackSend (channel: '#general', color: '#00FF00', message: "BUILD STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 
                 }
                 failure {
-slackSend (channel: 'general', color: '#FF0000', message: "BUILD STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+slackSend (channel: '#general', color: '#FF0000', message: "BUILD STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
                 }
             }
-        // }
+        }
         // stage('Unit test') {
         //     steps {
         //         sh 'npm test'
         //     }
 //             post {
 //                 success {
-//                     slackSend (channel: 'general', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: '#general', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //                 failure {
-// slackSend (channel: 'general', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// slackSend (channel: '#general', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //             }
         // }
@@ -52,10 +52,10 @@ slackSend (channel: 'general', color: '#FF0000', message: "BUILD STAGE FAILED: J
             // }
 //             post {
 //                 success {
-//                     slackSend (channel: 'general', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: '#general', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //                 failure {
-// slackSend (channel: 'general', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// slackSend (channel: '#general', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //             }
         // }
@@ -146,10 +146,10 @@ slackSend (channel: 'general', color: '#FF0000', message: "BUILD STAGE FAILED: J
 
 //             post {
 //                     success {
-//                     slackSend (channel: 'general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: '#general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                     }
 //                     failure {
-// slackSend (channel: 'general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// slackSend (channel: '#general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                     }
 //             }
         }
@@ -159,10 +159,10 @@ slackSend (channel: 'general', color: '#FF0000', message: "BUILD STAGE FAILED: J
 //             }
 //             post {
 //                 success {
-//                     slackSend (channel: 'general', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: '#general', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //                 failure {
-//  slackSend (channel: 'general', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//  slackSend (channel: '#general', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //             }
 //         }
