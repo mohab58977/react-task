@@ -3,50 +3,50 @@ pipeline {
    environment {
         dockerhub=credentials('Docker_Hub') 
          }
-   stages {
-        stage('lint') {
-            steps {
-                script {
-                  sh "npm  install"
-                  sh "npm run format"
-                //   sh "npm run lint"
-                }
-            }
-            }
-        stage('build') {
-            steps {
-                script {
-                  sh "npm run build"
-                }
-            }
-//             post {
-//                 success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "BUILD STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+      stages {
+//         stage('lint') {
+//             steps {
+//                 script {
+//                   sh "npm  install"
+//                   sh "npm run format"
+//                 //   sh "npm run lint"
+//                 }
+//             }
+//             }
+//         stage('build') {
+//             steps {
+//                 script {
+//                   sh "npm run build"
+//                 }
+//             }
+// //             post {
+// //                 success {
+// //                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "BUILD STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 
-//                 }
-//                 failure {
-// slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "BUILD STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
+// //                 }
+// //                 failure {
+// // slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "BUILD STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// //                 }
+// //             }
+//         }
+//         stage('Unit test') {
+//             steps {
+//                 sh 'npm test'
 //             }
-        }
-        stage('Unit test') {
-            steps {
-                sh 'npm test'
-            }
-//             post {
-//                 success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//                 failure {
-// slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//             }
-        }
-        stage('security scan') { 
+// //             post {
+// //                 success {
+// //                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// //                 }
+// //                 failure {
+// // slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// //                 }
+// //             }
+//         }
+//         stage('security scan') { 
            
             
-            steps {
-                sh 'npm install'
+//             steps {
+//                 sh 'npm install'
                 // sh 'npm audit fix --audit-level=critical --force'
                 // sh 'npm audit --audit-level=critical'
             }
