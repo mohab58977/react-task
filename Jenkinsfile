@@ -16,7 +16,6 @@ pipeline {
         stage('build') {
             steps {
                 script {
-                  sh "npm install"
                   sh "npm run build"
                 }
             }
@@ -32,7 +31,6 @@ pipeline {
         }
         stage('Unit test') {
             steps {
-                sh 'npm install'
                 sh 'npm test'
             }
 //             post {
