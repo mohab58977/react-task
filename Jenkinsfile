@@ -225,6 +225,6 @@ pipeline {
 //  slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //             }
-//         }
+         }
 }
 
