@@ -10,6 +10,7 @@ pipeline {
                   sh "npm run lint"
                 }
             }
+            }
         stage('build') {
             steps {
                 script {
@@ -177,5 +178,4 @@ pipeline {
 //             }
 //         }
     }
-}
 }
