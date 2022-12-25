@@ -9,7 +9,7 @@ pipeline {
         //         script {
         //           sh "npm  install"
         //           sh "npm run format"
-        //         //   sh "npm run lint"
+        //           sh "npm run lint"
         //         }
         //     }
         //     }
