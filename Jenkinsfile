@@ -105,15 +105,15 @@ pipeline {
                             gcloud auth activate-service-account serviceaccount@mohab-372519.iam.gserviceaccount.com --key-file="$my" --project=mohab-372519
                             gcloud container clusters get-credentials app-cluster --region europe-west3 --project mohab-372519
                             export BUILD_NUMBER=\$(cat Deployment/build-blue)
-                            mv Deployment/blue.yaml Deployment/blue
-                        cat Deployment/blue | envsubst > Deployment/blue.yaml
-                        rm -f Deployment/blue
-                        cat Deployment/blue.yaml 
+                            mv Deployment/blue/blue.yaml Deployment/blue/blue
+                        cat Deployment/blue/blue | envsubst > Deployment/blue/blue.yaml
+                        rm -f Deployment/blue/blue
+                        cat Deployment/blue/blue.yaml 
                             export BRANCH_NAME=\$(cat Deployment/build-branch)
-                            mv Deployment/service.yaml Deployment/service
-                        cat Deployment/service | envsubst > Deployment/service.yaml
-                        rm -f Deployment/service
-                        cat Deployment/service.yaml 
+                            mv Deployment/blue/service.yaml Deployment/blue/service
+                        cat Deployment/blue/service | envsubst > Deployment/blue/service.yaml
+                        rm -f Deployment/blue/service
+                        cat Deployment/blue/service.yaml 
                         kubectl apply -f Deployment/
                         """
                          } 
@@ -124,15 +124,15 @@ pipeline {
                             gcloud auth activate-service-account serviceaccount@mohab-372519.iam.gserviceaccount.com --key-file="$my" --project=mohab-372519
                             gcloud container clusters get-credentials app-cluster --region europe-west3-b --project mohab-372519
                             export BUILD_NUMBER=\$(cat Deployment/build-green)
-                            mv Deployment/green.yaml Deployment/green
-                        cat Deployment/green | envsubst > Deployment/green.yaml
-                        rm -f Deployment/green
-                        cat Deployment/green.yaml 
+                            mv Deployment/green/green.yaml Deployment/green/green
+                        cat Deployment/green/green | envsubst > Deployment/green/green.yaml
+                        rm -f Deployment/green/green
+                        cat Deployment/green/green.yaml 
                             export BRANCH_NAME=\$(cat Deployment/build-branch)
-                            mv Deployment/service.yaml Deployment/service
-                        cat Deployment/service | envsubst > Deployment/service.yaml
-                        rm -f Deployment/service
-                        cat Deployment/service.yaml 
+                            mv Deployment/green/service.yaml Deployment/green/service
+                        cat Deployment/green/service | envsubst > Deployment/green/service.yaml
+                        rm -f Deployment/green/service
+                        cat Deployment/green/service.yaml 
                         kubectl apply -f Deployment/
                         """
                          } 
