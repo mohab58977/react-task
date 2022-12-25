@@ -48,8 +48,8 @@ pipeline {
            
             
             steps {
-                sh 'npm install'
-                sh 'npm audit fix --audit-level=critical --force'
+                // sh 'npm install'
+                // sh 'npm audit fix --audit-level=critical --force'
                 // sh 'npm audit --audit-level=critical'
             }
 //             post {
@@ -144,7 +144,7 @@ pipeline {
                             gcloud auth activate-service-account  my-service-account@project-for-mohab.iam.gserviceaccount.com --key-file="$my" --project=project-for-mohab
                             gcloud container clusters get-credentials app-cluster --region europe-west3 --project project-for-mohab
                             export BUILD_NUMBER=\$(cat ../build)
-                             mv Deployment/deploy.yaml Deployment/deploy
+                            mv Deployment/deploy.yaml Deployment/deploy
                         cat Deployment/deploy | envsubst > Deployment/deploy.yaml
                         rm -f Deployment/deploy
                         cat Deployment/deploy.yaml 
