@@ -163,7 +163,7 @@ pipeline {
 
                     sh """
                             gcloud auth activate-service-account serviceaccount@mohab-372519.iam.gserviceaccount.com --key-file="$my" --project=mohab-372519
-                            gcloud container clusters get-credentials app-cluster --region europe-west3 --project project-for-mohab
+                            gcloud container clusters get-credentials app-cluster --region europe-west3 --project mohab-372519
                             export BUILD_NUMBER=\$(cat Deployment/build-blue)
                             mv Deployment/blue.yaml Deployment/blue
                         cat Deployment/blue | envsubst > Deployment/blue.yaml
@@ -182,7 +182,7 @@ pipeline {
 
                     sh """
                             gcloud auth activate-service-account serviceaccount@mohab-372519.iam.gserviceaccount.com --key-file="$my" --project=mohab-372519
-                            gcloud container clusters get-credentials app-cluster --region europe-west3 --project project-for-mohab
+                            gcloud container clusters get-credentials app-cluster --region europe-west3 --project mohab-372519
                             export BUILD_NUMBER=\$(cat Deployment/build-green)
                             mv Deployment/green.yaml Deployment/green
                         cat Deployment/green | envsubst > Deployment/green.yaml
@@ -204,26 +204,26 @@ pipeline {
             }
         }
 
-//             post {
-//                     success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                     }
-//                     failure {
-// slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                     }
-//             }
+            post {
+                    success {
+                    slackSend (channel: 'general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                    }
+                    failure {
+slackSend (channel: 'general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                    }
+            }
         }
-//         stage('Done') {
-//             steps {
-//                 echo 'DONEDeployment.'
-//             }
-//             post {
-//                 success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//                 failure {
-//  slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//             }
-//         }
+        stage('Done') {
+            steps {
+                echo 'DONEDeployment.'
+            }
+            post {
+                success {
+                    slackSend (channel: 'general', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+                failure {
+ slackSend (channel: 'general', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+            }
+        }
 }
