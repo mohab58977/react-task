@@ -27,9 +27,7 @@ pipeline {
 //                 }
 //             }
         }
-        stage('Unit test') { npm install
-            npm audit fix --audit-level=critical --force
-            npm audit --audit-level=critical
+        stage('Unit test') {
             steps {
                 sh 'npm install'
                 sh 'npm test'
