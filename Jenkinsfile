@@ -61,27 +61,27 @@ pipeline {
         // }
 
 
-//         stage('Build Image') {
-//             steps {
-//                 script {
-//                     if (env.BRANCH_NAME == 'blue') {
-//                         sh 'docker build -t blue:1.0 .'
-//                 } else if (env.BRANCH_NAME == 'green') {
-//                         sh 'docker build -t stage:1.0 .'
-//                 } else {
-//                         sh 'docker build -t test:1.0 .'
-//                     }
-//                 }
-//             }
-//             post {
-//                 success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "BUILD IMAGE STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//                 failure {
-//                 }slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "BUILD IMAGE STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+        stage('Build Image') {
+            steps {
+                script {
+                    if (env.BRANCH_NAME == 'blue') {
+                        sh 'docker build -t blue:1.0 .'
+                } else if (env.BRANCH_NAME == 'green') {
+                        sh 'docker build -t stage:1.0 .'
+                } else {
+                        sh 'docker build -t test:1.0 .'
+                    }
+                }
+            }
+            post {
+                success {
+                    slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "BUILD IMAGE STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+                failure {
+                }slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "BUILD IMAGE STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 
-//             }
-//         }
+            }
+         }
 //         stage('Push Image') {
 //             environment {
 //                 DOCKER_HUB = credentials('DockerHub')
@@ -204,14 +204,14 @@ pipeline {
             }
         }
 
-            post {
-                    success {
-                    slackSend (channel: 'general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-                    }
-                    failure {
-slackSend (channel: 'general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-                    }
-            }
+//             post {
+//                     success {
+//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     }
+//                     failure {
+// slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     }
+//             }
         }
 //         stage('Done') {
 //             steps {
@@ -219,10 +219,10 @@ slackSend (channel: 'general', color: '#FF0000', message: "DEPLOYMENT STAGE FAIL
 //             }
 //             post {
 //                 success {
-//                     slackSend (channel: 'general', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //                 failure {
-//  slackSend (channel: 'general', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//  slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //             }
 //         }
