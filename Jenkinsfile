@@ -78,8 +78,8 @@ pipeline {
                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "BUILD IMAGE STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
                 }
                 failure {
-                }slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "BUILD IMAGE STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-
+                slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "BUILD IMAGE STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+            }
             }
          }
 //         stage('Push Image') {
