@@ -146,9 +146,9 @@ pipeline {
                         docker rmi mohab5897/reactapp-green:$BUILD_NUMBER
                         docker image prune -f
                         echo ${BUILD_NUMBER} > ../build-green
-                        ../build-green
+                        cat ../build-green
                         echo ${BRANCH_NAME} > ../build-branch
-                        ../build-branch
+                        cat ../build-branch
                         """
                        
               
@@ -164,7 +164,7 @@ pipeline {
                           withCredentials([file(credentialsId: 'my', variable: 'my')]){
 
                     sh """
-                            gcloud auth activate-service-account  my-service-account@project-for-mohab.iam.gserviceaccount.com --key-file="$my" --project=project-for-mohab
+                            gcloud auth activate-service-account serviceaccount@mohab-372519.iam.gserviceaccount.com --key-file="$my" --project=mohab-372519
                             gcloud container clusters get-credentials app-cluster --region europe-west3 --project project-for-mohab
                             export BUILD_NUMBER=\$(cat ../build-blue)
                             mv Deployment/blue.yaml Deployment/blue
@@ -183,7 +183,7 @@ pipeline {
                      withCredentials([file(credentialsId: 'my', variable: 'my')]){
 
                     sh """
-                            gcloud auth activate-service-account  my-service-account@project-for-mohab.iam.gserviceaccount.com --key-file="$my" --project=project-for-mohab
+                            gcloud auth activate-service-account serviceaccount@mohab-372519.iam.gserviceaccount.com --key-file="$my" --project=mohab-372519
                             gcloud container clusters get-credentials app-cluster --region europe-west3 --project project-for-mohab
                             export BUILD_NUMBER=\$(cat ../build-green)
                             mv Deployment/green.yaml Deployment/green
