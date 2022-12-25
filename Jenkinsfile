@@ -50,7 +50,7 @@ pipeline {
             steps {
                 sh 'npm install'
                 sh 'npm audit fix --audit-level=critical --force'
-                sh 'npm audit --audit-level=critical'
+                // sh 'npm audit --audit-level=critical'
             }
 //             post {
 //                 success {
@@ -127,7 +127,7 @@ pipeline {
             steps {
                 steps {
                 script {
-                    if (env.BRANCH_NAME == 'master') {
+                    // if (env.BRANCH_NAME == 'main') {
                         sh """
                         docker login -u $dockerhub_USR -p $dockerhub_PSW
                         docker build -t mohab5897/app:$BUILD_NUMBER .
@@ -136,7 +136,7 @@ pipeline {
                         docker image prune -f
                         echo ${BUILD_NUMBER} > ../build
                         """
-                    } else if ( env.BRANCH_NAME == 'dev') {
+                    // } else if ( env.BRANCH_NAME == 'dev') {
                        
                 withCredentials([file(credentialsId: 'my', variable: 'my')]){
 
