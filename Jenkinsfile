@@ -133,10 +133,10 @@ pipeline {
                         docker push mohab5897/reactapp-blue:$BUILD_NUMBER
                         docker rmi mohab5897/reactapp-blue:$BUILD_NUMBER
                         docker image prune -f
-                        echo ${BUILD_NUMBER} > ../build-blue
+                        echo ${BUILD_NUMBER} > Deployment/build-blue
                         cat ../build-blue
-                        echo ${BRANCH_NAME} > ../build-branch
-                        cat ../build-branch
+                        echo ${BRANCH_NAME} > Deployment/build-branch
+                        cat Deployment/build-branch
                         """
                     } else if ( env.BRANCH_NAME == 'green') {
                     sh """
@@ -145,10 +145,10 @@ pipeline {
                         docker push mohab5897/reactapp-green:$BUILD_NUMBER
                         docker rmi mohab5897/reactapp-green:$BUILD_NUMBER
                         docker image prune -f
-                        echo ${BUILD_NUMBER} > ../build-green
-                        cat ../build-green
-                        echo ${BRANCH_NAME} > ../build-branch
-                        cat ../build-branch
+                        echo ${BUILD_NUMBER} > Deployment/build-green
+                        cat Deployment/build-green
+                        echo ${BRANCH_NAME} > Deployment/build-branch
+                        cat Deployment/build-branch
                         """
                        
               
@@ -166,12 +166,12 @@ pipeline {
                     sh """
                             gcloud auth activate-service-account serviceaccount@mohab-372519.iam.gserviceaccount.com --key-file="$my" --project=mohab-372519
                             gcloud container clusters get-credentials app-cluster --region europe-west3 --project project-for-mohab
-                            export BUILD_NUMBER=\$(cat ../build-blue)
+                            export BUILD_NUMBER=\$(cat Deployment/build-blue)
                             mv Deployment/blue.yaml Deployment/blue
                         cat Deployment/blue | envsubst > Deployment/blue.yaml
                         rm -f Deployment/blue
                         cat Deployment/blue.yaml 
-                            export BRANCH_NAME=\$(cat ../build-branch)
+                            export BRANCH_NAME=\$(cat Deployment/build-branch)
                             mv Deployment/service.yaml Deployment/service
                         cat Deployment/service | envsubst > Deployment/service.yaml
                         rm -f Deployment/service
@@ -185,12 +185,12 @@ pipeline {
                     sh """
                             gcloud auth activate-service-account serviceaccount@mohab-372519.iam.gserviceaccount.com --key-file="$my" --project=mohab-372519
                             gcloud container clusters get-credentials app-cluster --region europe-west3 --project project-for-mohab
-                            export BUILD_NUMBER=\$(cat ../build-green)
+                            export BUILD_NUMBER=\$(cat Deployment/build-green)
                             mv Deployment/green.yaml Deployment/green
                         cat Deployment/green | envsubst > Deployment/green.yaml
                         rm -f Deployment/green
                         cat Deployment/green.yaml 
-                            export BRANCH_NAME=\$(cat ../build-branch)
+                            export BRANCH_NAME=\$(cat Deployment/build-branch)
                             mv Deployment/service.yaml Deployment/service
                         cat Deployment/service | envsubst > Deployment/service.yaml
                         rm -f Deployment/service
@@ -217,7 +217,7 @@ pipeline {
         }
 //         stage('Done') {
 //             steps {
-//                 echo 'DONE...'
+//                 echo 'DONEDeployment.'
 //             }
 //             post {
 //                 success {
