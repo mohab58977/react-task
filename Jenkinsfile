@@ -13,22 +13,22 @@ pipeline {
         //         }
         //     }
         //     }
-        stage('build') {
-            steps {
-                script {
-                  sh "npm run build"
-                }
-            }
-            post {
-                success {
-                    slackSend (channel: '#general', color: '#00FF00', message: "BUILD STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//         stage('build') {
+//             steps {
+//                 script {
+//                   sh "npm run build"
+//                 }
+//             }
+//             post {
+//                 success {
+//                     slackSend (channel: '#general', color: '#00FF00', message: "BUILD STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 
-                }
-                failure {
-slackSend (channel: '#general', color: '#FF0000', message: "BUILD STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-                }
-            }
-        }
+//                 }
+//                 failure {
+// slackSend (channel: '#general', color: '#FF0000', message: "BUILD STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                 }
+//             }
+//         }
         // stage('Unit test') {
         //     steps {
         //         sh 'npm test'
