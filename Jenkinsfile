@@ -21,11 +21,11 @@ pipeline {
         //     }
 //             post {
 //                 success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "BUILD STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: 'general', color: '#00FF00', message: "BUILD STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 
 //                 }
 //                 failure {
-// slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "BUILD STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// slackSend (channel: 'general', color: '#FF0000', message: "BUILD STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //             }
         // }
@@ -35,10 +35,10 @@ pipeline {
         //     }
 //             post {
 //                 success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: 'general', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //                 failure {
-// slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// slackSend (channel: 'general', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //             }
         // }
@@ -52,10 +52,10 @@ pipeline {
             // }
 //             post {
 //                 success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: 'general', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //                 failure {
-// slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// slackSend (channel: 'general', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //             }
         // }
@@ -75,10 +75,10 @@ pipeline {
             }
             post {
                 success {
-                    slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "BUILD IMAGE STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                    slackSend (channel: 'general', color: '#00FF00', message: "BUILD IMAGE STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
                 }
                 failure {
-                slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "BUILD IMAGE STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                slackSend (channel: 'general', color: '#FF0000', message: "BUILD IMAGE STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
             }
             }
          }
@@ -114,10 +114,10 @@ pipeline {
 //             }
 //             post {
 //                 success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "PUSH IMAGE STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: 'general', color: '#00FF00', message: "PUSH IMAGE STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //                 failure {
-// slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "PUSH IMAGE STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// slackSend (channel: 'general', color: '#FF0000', message: "PUSH IMAGE STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //             }
 //         }
@@ -206,10 +206,10 @@ pipeline {
 
 //             post {
 //                     success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: 'general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                     }
 //                     failure {
-// slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+// slackSend (channel: 'general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                     }
 //             }
         }
@@ -219,10 +219,10 @@ pipeline {
 //             }
 //             post {
 //                 success {
-//                     slackSend (channel: 'jenkins-pipeline', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                     slackSend (channel: 'general', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //                 failure {
-//  slackSend (channel: 'jenkins-pipeline', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//  slackSend (channel: 'general', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 //                 }
 //             }
 //         }
