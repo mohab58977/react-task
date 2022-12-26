@@ -114,7 +114,7 @@ pipeline {
                         cat Deployment/blue/service | envsubst > Deployment/blue/service.yaml
                         rm -f Deployment/blue/service
                         cat Deployment/blue/service.yaml 
-                        kubectl apply -f Deployment/
+                        kubectl apply -f Deployment/blue
                         """
                          } 
                     } else if ( env.BRANCH_NAME == 'green') {
@@ -133,7 +133,7 @@ pipeline {
                         cat Deployment/green/service | envsubst > Deployment/green/service.yaml
                         rm -f Deployment/green/service
                         cat Deployment/green/service.yaml 
-                        kubectl apply -f Deployment/
+                        kubectl apply -f Deployment/green/
                         """
                          } 
                        
