@@ -42,23 +42,23 @@ slackSend (channel: '#general', color: '#FF0000', message: "TEST STAGE FAILED: J
                 }
             }
         }
-        stage('security scan') { 
+        // stage('security scan') { 
            
             
-            steps {
-                sh 'npm install'
-                sh 'npm audit fix --audit-level=critical --force'
-                sh 'npm audit --audit-level=critical'
-            }
-            post {
-                success {
-                    slackSend (channel: '#general', color: '#00FF00', message: "SCAN STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-                }
-                failure {
-slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-                }
-            }
-        }
+        //     steps {
+        //         sh 'npm install'
+        //         sh 'npm audit fix --audit-level=critical --force'
+        //         sh 'npm audit --audit-level=critical'
+        //     }
+//             post {
+//                 success {
+//                     slackSend (channel: '#general', color: '#00FF00', message: "SCAN STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                 }
+//                 failure {
+// slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                 }
+//             }
+//         }
 
 
         stage('build image') {
