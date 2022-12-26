@@ -146,8 +146,6 @@ slackSend (channel: '#general', color: '#FF0000', message: "IMAGE CREATION STAGE
                 } 
 
             }
-        }
-
             post {
                     success {
                     slackSend (channel: '#general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
@@ -156,5 +154,8 @@ slackSend (channel: '#general', color: '#FF0000', message: "IMAGE CREATION STAGE
 slackSend (channel: '#general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
                     }
             }
+        }
+
+            
         }
 }
