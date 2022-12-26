@@ -4,61 +4,61 @@ pipeline {
         dockerhub=credentials('Docker_Hub') 
          }
    stages {
-        // stage('lint') {
-        //     steps {
-        //         script {
-        //           sh "npm  install"
-        //           sh "npm run format"
-        //           sh "npm run lint"
-        //         }
-        //     }
-        //     }
-//         stage('build') {
-//             steps {
-//                 script {
-//                   sh "npm run build"
-//                 }
-//             }
-//             post {
-//                 success {
-//                     slackSend (channel: '#general', color: '#00FF00', message: "BUILD STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+        stage('lint') {
+            steps {
+                script {
+                  sh "npm  install"
+                  sh "npm run format"
+                //   sh "npm run lint"
+                }
+            }
+            }
+        stage('build') {
+            steps {
+                script {
+                  sh "npm run build"
+                }
+            }
+            post {
+                success {
+                    slackSend (channel: '#general', color: '#00FF00', message: "BUILD STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
 
-//                 }
-//                 failure {
-// slackSend (channel: '#general', color: '#FF0000', message: "BUILD STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//             }
-//         }
-//         stage('Unit test') {
-//             steps {
-//                 sh 'npm test'
-//             }
-//             post {
-//                 success {
-//                     slackSend (channel: '#general', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//                 failure {
-// slackSend (channel: '#general', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//             }
-//         }
-        // stage('security scan') { 
+                }
+                failure {
+slackSend (channel: '#general', color: '#FF0000', message: "BUILD STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+            }
+        }
+        stage('Unit test') {
+            steps {
+                sh 'npm test'
+            }
+            post {
+                success {
+                    slackSend (channel: '#general', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+                failure {
+slackSend (channel: '#general', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+            }
+        }
+        stage('security scan') { 
            
             
-        //     steps {
-        //         sh 'npm install'
-                // sh 'npm audit fix --audit-level=critical --force'
-                // sh 'npm audit --audit-level=critical'
-            // }
-//             post {
-//                 success {
-//                     slackSend (channel: '#general', color: '#00FF00', message: "TEST STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//                 failure {
-// slackSend (channel: '#general', color: '#FF0000', message: "TEST STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//             }
-        // }
+            steps {
+                sh 'npm install'
+                sh 'npm audit fix --audit-level=critical --force'
+                sh 'npm audit --audit-level=critical'
+            }
+            post {
+                success {
+                    slackSend (channel: '#general', color: '#00FF00', message: "SCAN STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+                failure {
+slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+            }
+        }
 
 
         stage('build image') {
