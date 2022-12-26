@@ -50,15 +50,15 @@ slackSend (channel: '#general', color: '#FF0000', message: "TEST STAGE FAILED: J
         //         sh 'npm audit fix --audit-level=critical --force'
         //         sh 'npm audit --audit-level=critical'
         //     }
-            post {
-                success {
-                    slackSend (channel: '#general', color: '#00FF00', message: "SCAN STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-                }
-                failure {
-slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-                }
-            }
-        }
+//             post {
+//                 success {
+//                     slackSend (channel: '#general', color: '#00FF00', message: "SCAN STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                 }
+//                 failure {
+// slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+//                 }
+//             }
+//         }
 
 
         stage('build image') {
@@ -89,6 +89,14 @@ slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: J
                       }
                 } 
 
+            }
+             post {
+                success {
+                    slackSend (channel: '#general', color: '#00FF00', message: "IMAGE CREATION STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+                failure {
+slackSend (channel: '#general', color: '#FF0000', message: "IMAGE CREATION STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
             }
         }
                 stage('deploy') {
@@ -135,11 +143,10 @@ slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: J
                        
               
                    }
-                  
-        }
-        
-                
-                 post {
+                } 
+
+            }
+            post {
                     success {
                     slackSend (channel: '#general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
                     }
@@ -147,9 +154,8 @@ slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: J
 slackSend (channel: '#general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
                     }
             }
-
-            }
         }
 
-       
+            
+        }
 }
