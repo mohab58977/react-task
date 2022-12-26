@@ -4,15 +4,15 @@ pipeline {
         dockerhub=credentials('Docker_Hub') 
          }
    stages {
-        // stage('lint') {
-        //     steps {
-        //         script {
-        //           sh "npm  install"
-        //           sh "npm run format"
-        //           sh "npm run lint"
-        //         }
-        //     }
-        //     }
+        stage('lint') {
+            steps {
+                script {
+                  sh "npm  install"
+                  sh "npm run format"
+                //   sh "npm run lint"
+                }
+            }
+            }
         stage('build') {
             steps {
                 script {
