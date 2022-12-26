@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: blue
-    version: ${BUILD_NUMBER}
+    version: v-${BUILD_NUMBER}
 
   name: blue
 spec:

@@ -1,6 +1,11 @@
-FROM node:16-bullseye-slim
+FROM node:16-bullseye-slim AS build
 WORKDIR /app
 COPY . .
 RUN npm install &&  npm run build
-EXPOSE 3000
-CMD ["/bin/sh", "-c" ,"npm run start"] 
+
+FROM nginx:alpine AS prod
+WORKDIR /usr/share/nginx/html
+COPY --from=build /app/dist .
+EXPOSE 80
+# run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: green
-    version: ${BUILD_NUMBER}
+    version: v-${BUILD_NUMBER}
   name: green
 spec:
   replicas: 1
