@@ -4,15 +4,15 @@ pipeline {
         dockerhub=credentials('Docker_Hub') 
          }
    stages {
-        stage('lint') {
-            steps {
-                script {
-                  sh "npm  install"
-                  sh "npm run format"
-                  sh "npm run lint"
-                }
-            }
-            }
+        // stage('lint') {
+        //     steps {
+        //         script {
+        //           sh "npm  install"
+        //           sh "npm run format"
+        //           sh "npm run lint"
+        //         }
+        //     }
+        //     }
         stage('build') {
             steps {
                 script {
@@ -144,26 +144,26 @@ slackSend (channel: '#general', color: '#FF0000', message: "TEST STAGE FAILED: J
             }
         }
 
-//             post {
-//                     success {
-//                     slackSend (channel: '#general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                     }
-//                     failure {
-// slackSend (channel: '#general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                     }
-//             }
+            post {
+                    success {
+                    slackSend (channel: '#general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                    }
+                    failure {
+slackSend (channel: '#general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                    }
+            }
         }
-//         stage('Done') {
-//             steps {
-//                 echo 'DONEDeployment.'
-//             }
-//             post {
-//                 success {
-//                     slackSend (channel: '#general', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//                 failure {
-//  slackSend (channel: '#general', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//             }
-//         }
+        stage('Done') {
+            steps {
+                echo 'DONEDeployment.'
+            }
+            post {
+                success {
+                    slackSend (channel: '#general', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+                failure {
+ slackSend (channel: '#general', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+            }
+        }
 }
