@@ -72,9 +72,7 @@ slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: J
                         docker rmi mohab5897/reactapp-blue:$BUILD_NUMBER
                         docker image prune -f
                         echo ${BUILD_NUMBER} > Deployment/build-blue
-                        cat ../build-blue
                         echo ${BRANCH_NAME} > Deployment/build-branch
-                        cat Deployment/build-branch
                         """
                     } else if ( env.BRANCH_NAME == 'green') {
                     sh """
@@ -84,15 +82,21 @@ slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: J
                         docker rmi mohab5897/reactapp-green:$BUILD_NUMBER
                         docker image prune -f
                         echo ${BUILD_NUMBER} > Deployment/build-green
-                        cat Deployment/build-green
                         echo ${BRANCH_NAME} > Deployment/build-branch
-                        cat Deployment/build-branch
                         """
                        
               
                       }
                 } 
 
+            }
+             post {
+                success {
+                    slackSend (channel: '#general', color: '#00FF00', message: "IMAGE CREATION STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
+                failure {
+slackSend (channel: '#general', color: '#FF0000', message: "IMAGE CREATION STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                }
             }
         }
                 stage('deploy') {
@@ -144,26 +148,12 @@ slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: J
             }
         }
 
-//             post {
-//                     success {
-//                     slackSend (channel: '#general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                     }
-//                     failure {
-// slackSend (channel: '#general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                     }
-//             }
+            post {
+                    success {
+                    slackSend (channel: '#general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                    }
+                    failure {
+slackSend (channel: '#general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
+                    }
+            }
         }
-//         stage('Done') {
-//             steps {
-//                 echo 'DONEDeployment.'
-//             }
-//             post {
-//                 success {
-//                     slackSend (channel: '#general', color: '#00FF00', message: "CONGRATULATIONS ALL STAGES SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//                 failure {
-//  slackSend (channel: '#general', color: '#FF0000', message: "SORRY BUILD FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
-//                 }
-//             }
-//         }
-}
