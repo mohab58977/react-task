@@ -135,7 +135,11 @@ slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: J
                        
               
                    }
-                   post {
+                  
+        }
+        
+                
+                 post {
                     success {
                     slackSend (channel: '#general', color: '#00FF00', message: "DEPLOYMENT STAGE SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
                     }
@@ -143,8 +147,6 @@ slackSend (channel: '#general', color: '#FF0000', message: "SCAN STAGE FAILED: J
 slackSend (channel: '#general', color: '#FF0000', message: "DEPLOYMENT STAGE FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'")
                     }
             }
-        }
-                } 
 
             }
         }
